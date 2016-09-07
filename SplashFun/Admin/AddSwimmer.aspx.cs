@@ -23,8 +23,40 @@ namespace SplashFun.Admin
 
         protected void btnAddSwimmer_Click(object sender, EventArgs e)
         {
+            Boolean fileOK = false;
+            string avatar = "";
             //get avator
             string path = Server.MapPath("~/Images/avatars/");
+            if (SwimmerImage.FileName.Length > 0)
+            {
+                String fileExtension = System.IO.Path.GetExtension(SwimmerImage.FileName).ToLower();
+                String[] allowedExtensions = { ".gif", ".png", ".jpeg", ".jpg" };
+                for (int i = 0; i < allowedExtensions.Length; i++)
+                {
+                    if (fileExtension == allowedExtensions[i])
+                    {
+                        fileOK = true;
+                    }
+                }
+                if (fileOK)
+                {
+                    try
+                    {
+                        // Save to Images folder.
+                        SwimmerImage.PostedFile.SaveAs(path + SwimmerImage.FileName);
+                        avatar = SwimmerImage.FileName;
+                    }
+                    catch (Exception ex)
+                    {
+                        //LabelAddStatus.Text = ex.Message;
+                    }
+                }
+            }
+            else
+            {
+                avatar = "holder.png";
+            }
+            
 
             var newSwimmer = new Swimmer();
             newSwimmer.FirstName = txtFirstName.Text;
@@ -32,7 +64,7 @@ namespace SplashFun.Admin
             newSwimmer.TeamID = Convert.ToInt32(drpTeam.SelectedValue);
             newSwimmer.Gender = drpGender.SelectedValue;
             newSwimmer.Age = Convert.ToInt32(txtAge.Text);
-            newSwimmer.Avatar = "holder.png";
+            newSwimmer.Avatar = avatar;
 
             using (SwimContext _db = new SwimContext())
             {

@@ -13,17 +13,16 @@
             <div class="form-group">
                 <asp:Label ID="lblFirstName" CssClass="col-md-1 control-label" runat="server">First Name:</asp:Label>
                 <asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="reqFieldValidatorFirstName" runat="server" Text="* First name required" ControlToValidate="txtFirstName" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="reqFieldValidatorFirstName" runat="server" CssClass="text-danger" Text="* First name required" ControlToValidate="txtFirstName" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
             </div>     
             <div class="form-group">
                 <asp:Label ID="lblLastName" CssClass="col-md-1 control-label" runat="server">Last Name:</asp:Label>
                 <asp:TextBox ID="txtLastName" runat="server"></asp:TextBox>                
-                <asp:RequiredFieldValidator ID="reqFieldValidatorLastName" runat="server" Text="* Last name required" ControlToValidate="txtLastName" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="reqFieldValidatorLastName" runat="server" CssClass="text-danger" Text="* Last name required" ControlToValidate="txtLastName" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
             </div>
             <div class="form-group">               
                 <asp:Label ID="Label1" CssClass="col-md-1 control-label" runat="server">Gender:</asp:Label>
-                <asp:DropDownList ID="drpGender" runat="server" CssClass="col-md-2">
-                    <asp:ListItem>------</asp:ListItem>
+                <asp:DropDownList ID="drpGender" runat="server" CssClass="col-md-2">                   
                     <asp:ListItem Text="Female" Value="F"></asp:ListItem>
                     <asp:ListItem Text="Male" Value="M"></asp:ListItem>
                 </asp:DropDownList>
@@ -31,10 +30,13 @@
             <div class="form-group">
                 <asp:Label ID="lblAge" CssClass="col-md-1 control-label" runat="server">Age:</asp:Label>
                 <asp:TextBox ID="txtAge" runat="server"></asp:TextBox>
-                <asp:RangeValidator ID="rangeValidator" runat="server" ControlToValidate="txtAge" Type="Integer"  Text="* Age has to be between 3 to 18"
+                <asp:RangeValidator ID="rangeValidator" runat="server" CssClass="text-danger" ControlToValidate="txtAge" Type="Integer" Text="* Age has to be between 3 to 18"
                     MinimumValue="3" MaximumValue="18"></asp:RangeValidator>
             </div>
-
-            <asp:Button ID="btnAddSwimmer" runat="server" Text="Add" OnClick="btnAddSwimmer_Click" CausesValidation="true" />
+            <div class="form-group">
+                <asp:Label ID="lblAvatar" CssClass="col-md-1 control-label" runat="server">Avatar:</asp:Label>
+                <asp:FileUpload ID="SwimmerImage" runat="server" />               
+            </div>
+            <asp:Button ID="btnAddSwimmer" runat="server" Text="Add" CssClass="btn btn-primary" OnClick="btnAddSwimmer_Click" CausesValidation="true" />
     </div>
 </asp:Content>

@@ -96,9 +96,19 @@
                         </asp:DropDownList>
                     </div>
                     <div class="form-group">
-                        <asp:Label ID="lblTime" CssClass="col-md-1 control-label" runat="server">Time:</asp:Label>
+                        <asp:Label ID="lblTime2" CssClass="col-md-1 control-label" runat="server">Time:</asp:Label>
                         <asp:TextBox ID="txtTime" runat="server"></asp:TextBox>
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" Text="Must be in format '00:00:00'." ControlToValidate="txtTime" SetFocusOnError="True" Display="Dynamic" ValidationExpression="^([0-5]?\d:)?([0-5]?\d):([0-5]?\d)$"></asp:RegularExpressionValidator>
+                    </div>
+                    <div class="form-group">
+                        <asp:Label ID="lblEventName" CssClass="col-md-1 control-label" runat="server">Event Name:</asp:Label>
+                        <asp:TextBox ID="txtEventName" runat="server"></asp:TextBox>                        
+                    </div>
+                    <div class="form-group">
+                        <asp:Label ID="lblEventDate" CssClass="col-md-1 control-label" runat="server">Event Date:</asp:Label>
+                        <asp:TextBox ID="txtEventDate" runat="server"></asp:TextBox>
+                        <asp:Button ID="btnOpenCalendar" runat="server" Text="me" OnClick="btnOpenCalendar_Click" />
+                        <asp:Calendar ID="cldEventDate" runat="server" Visible="false" ></asp:Calendar>
                     </div>
                 </div>
                 <asp:Button ID="btnAddNewTime" runat="server" Text="Add" OnClick="btnAddNewTime_Click" CausesValidation="true" />

@@ -12,9 +12,16 @@ namespace SplashFun
     public partial class SwimmerDetails : System.Web.UI.Page
     {
         List<TimeRecord> times;
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            Type t = this.GetType();
+            Page.ClientScript.RegisterStartupScript (t, "MyScript",
+               "<script language=javascript>" +
+               "function AlertHello() { alert('Hello ASP.NET'); }</script>");
+
+            Button time = (Button)SwimmerDetailsView.FindControl("btnOpenCalendar");
+            time.Attributes["onclick"] = "AlertHello()";
             
         }
 
@@ -22,7 +29,7 @@ namespace SplashFun
         // or be decorated with a value provider attribute, e.g. [QueryString]int id
         public IQueryable<Swimmer> SwimmerDetailsView_GetItem([QueryString("swimmerID")] int? swimmerId)
         {
-           
+
             var db = new SplashFun.Models.SwimContext();
             IQueryable<Swimmer> query = db.Swimmers;
             if (swimmerId.HasValue)
@@ -66,7 +73,7 @@ namespace SplashFun
             DropDownList stroke = (DropDownList)SwimmerDetailsView.FindControl("drpStroke");
             DropDownList measure = (DropDownList)SwimmerDetailsView.FindControl("drpDistance");
 
-            
+
             if (Request.QueryString["SwimmerID"] != null)
             {
                 int sid = Convert.ToInt32(Request.QueryString["SwimmerID"]);
@@ -89,10 +96,10 @@ namespace SplashFun
                     addNew.Visible = false;
                 }
             }
-           
-            
 
-            
+
+
+
         }
 
         protected void btnShowAddTime_Click(object sender, EventArgs e)
@@ -109,7 +116,7 @@ namespace SplashFun
         {
             var db = new SplashFun.Models.SwimContext();
             times = db.TimeRecords.Where(t => t.Swimmer.SwimmerID == swimmerId).ToList(); ;
-            
+
             if (!IsPostBack)
             {
                 Repeater repeaterTimes = SwimmerDetailsView.FindControl("repBestTimes") as Repeater;
@@ -121,6 +128,11 @@ namespace SplashFun
             }
 
             return times;
+        }
+
+        protected void btnOpenCalendar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

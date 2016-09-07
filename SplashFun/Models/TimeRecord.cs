@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SplashFun.Models
@@ -11,6 +12,7 @@ namespace SplashFun.Models
         [Required]
         public string Record { get; set; }
 
+        public DateTime? EventDate { get; set;  }
 
       
         [Required]
